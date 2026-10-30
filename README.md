@@ -1,3 +1,4 @@
+
 # TaskFlow DAM
 
 Aplicación de escritorio desarrollada con **C# y WPF** para organizar las tareas académicas, consultar el progreso y gestionar las actividades pendientes desde una interfaz sencilla y accesible.
@@ -108,7 +109,74 @@ Durante la revisión de la interfaz se tuvieron en cuenta los siguientes aspecto
 
 También se realizaron comprobaciones con Narrador para verificar que los controles proporcionan información comprensible a las tecnologías de asistencia.
 
-## 9. Pruebas realizadas
+## 9. Auditoría de usabilidad y accesibilidad con IA
+
+Se ha realizado una auditoría de la interfaz de TaskFlow DAM mediante un modelo de inteligencia artificial, tomando como referencia las heurísticas de usabilidad de Nielsen, la norma ISO 9241-110 y los criterios de accesibilidad WCAG 2.1 (nivel AA).
+
+### 9.1. Prompt de auditoría
+
+Para realizar la evaluación se utilizó un Prompt Maestro diseñado para analizar cuatro aspectos principales:
+
+- Heurísticas de usabilidad de Nielsen (H1-H10).
+- Accesibilidad y propiedades de UI Automation.
+- Ergonomía de interacción y organización visual.
+- Clasificación de incidencias según su severidad, de 0 a 4.
+
+**Evidencia del prompt ejecutado:**
+
+![Prompt de auditoría de usabilidad](screenshots/prompt_auditoria.png)
+
+### 9.2. Informe de auditoría
+
+**Puntuación obtenida: 8,2/10 — Notable.**
+
+El dictamen de la auditoría fue favorable, aunque se recomendaron algunas correcciones.
+
+Los principales aspectos positivos identificados fueron:
+
+- Buena jerarquía visual y organización de los contenidos.
+- Uso coherente de colores, tarjetas y espacios.
+- Correcta identificación accesible de los controles principales.
+- Contraste suficiente en las combinaciones cromáticas analizadas, cumpliendo WCAG 2.1 AA.
+- Dimensiones adecuadas de los principales controles interactivos.
+
+La auditoría identificó siete incidencias:
+
+| ID | Incidencia | Severidad |
+|---|---|---|
+| I-01 | Barra de estado sin contadores adicionales | 2 - Moderada |
+| I-02 | `IsCancel` asociado al botón Limpiar | 2 - Moderada |
+| I-03 | Botones principales sin mnemónicos | 2 - Moderada |
+| I-04 | Falta de identificación accesible contextual del ListBox y sus elementos | 2 - Moderada |
+| I-05 | Validación de campos no verificable mediante el análisis estático | 2 - Moderada |
+| I-06 | Área de interacción de los CheckBox mejorable | 1 - Cosmética |
+| I-07 | `TabIndex` incompleto en los elementos de la lista | 1 - Cosmética |
+
+No se detectaron incidencias graves ni catastróficas.
+
+### 9.3. Comprobaciones y mejoras realizadas
+
+Tras revisar los resultados, se contrastaron las observaciones con la implementación y las pruebas realizadas durante el desarrollo.
+
+| Aspecto | Actuación |
+|---|---|
+| Navegación mediante teclado | Se definió el orden de tabulación de los controles del formulario y se comprobó su funcionamiento. |
+| Accesibilidad de controles | Se añadieron propiedades `AutomationProperties.Name` y `AutomationProperties.HelpText` a los controles principales. |
+| Etiquetas | Se utilizaron propiedades `Target` y mnemónicos en las etiquetas del formulario. |
+| Atajos de teclado | Se comprobaron las acciones de Enter, Escape y Alt+E. |
+| Validación | Se comprobó en ejecución que no se puede añadir una tarea con el título vacío. |
+| Contraste | Se revisaron las principales combinaciones cromáticas, que superan los umbrales AA en los casos analizados. |
+| Desplazamiento | Se incorporó y comprobó el desplazamiento mediante la rueda del ratón en la lista de tareas. |
+
+Algunas recomendaciones del informe quedan como posibles mejoras adicionales, especialmente la identificación contextual de cada tarea para los lectores de pantalla, los mnemónicos en los botones y la ampliación del área interactiva de las casillas de verificación.
+
+### 9.4. Limitaciones de la auditoría
+
+La evaluación realizada fue visual y estática, por lo que no sustituye a una prueba completa de ejecución con lectores de pantalla y herramientas específicas de accesibilidad.
+
+Las comprobaciones funcionales se complementaron con pruebas manuales durante el desarrollo de la aplicación.
+
+## 10. Pruebas realizadas
 
 | Prueba | Resultado |
 |---|---|
@@ -124,7 +192,7 @@ También se realizaron comprobaciones con Narrador para verificar que los contro
 | Comprobar el desplazamiento del contenido | Correcto |
 | Comprobar la lectura mediante Narrador | Correcto |
 
-## 10. Ejecución del proyecto
+## 11. Ejecución del proyecto
 
 1. Abrir la solución o el proyecto en Visual Studio.
 2. Comprobar que están disponibles las dependencias de Entity Framework Core y SQLite.
@@ -132,7 +200,7 @@ También se realizaron comprobaciones con Narrador para verificar que los contro
 4. Compilar el proyecto.
 5. Ejecutar la aplicación desde el entorno de desarrollo.
 
-## 11. Conclusión
+## 12. Conclusión
 
 TaskFlow DAM reúne las funcionalidades básicas de una aplicación de gestión de tareas y aplica conceptos fundamentales de desarrollo de interfaces con WPF: separación entre interfaz y datos, enlace de datos, actualización reactiva y persistencia.
 
