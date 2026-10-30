@@ -1,0 +1,12 @@
+# Archivos generados por Visual Studio
+.vs/
+bin/
+obj/
+
+# Configuración local
+*.user
+*.suo
+
+# Archivos temporales
+*.tmp
+*.log
